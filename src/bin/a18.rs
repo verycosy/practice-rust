@@ -11,4 +11,30 @@
 // * Return a result from the function
 // * The Err variant should detail the reason why they cannot make a purchase
 
-fn main() {}
+struct Customer {
+    age: i32
+}
+
+fn can_purchase(customer: &Customer) -> Result<(), String> {
+    if customer.age >= 21 {
+        return Ok(())
+    }
+
+    Err("Can not purchase: too young ".to_owned())
+}
+
+fn main() {
+    let customer1 = Customer {
+        age: 21
+    };
+
+    let customer2 = Customer {
+        age: 20
+    };
+
+    let result1 = can_purchase(&customer1);
+    println!("{:?}", result1);
+
+    let result2 = can_purchase(&customer2);
+    println!("{:?}", result2);
+}
